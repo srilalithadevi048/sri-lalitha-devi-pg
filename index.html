@@ -1,1972 +1,1672 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-  <meta name="theme-color" content="#673ab7">
-
-  <title>Sri Lalitha Devi PG</title>
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #eef1f5;
-      color: #202124;
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .app-screen {
-      width: 100%;
-      height: 100vh;
-      height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      overflow: hidden;
-    }
-
-    .app-card {
-      width: 100%;
-      max-width: 680px;
-      height: calc(100vh - 24px);
-      height: calc(100dvh - 24px);
-      background: #ffffff;
-      border-radius: 22px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 8px 35px rgba(0, 0, 0, 0.12);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .app-header {
-      flex-shrink: 0;
-      background: #673ab7;
-      color: #ffffff;
-      padding: 17px 20px 16px;
-      padding-top: max(17px, env(safe-area-inset-top));
-      position: relative;
-      z-index: 10;
-    }
-
-    .app-header-row {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-    }
-
-    .app-logo {
-      width: 43px;
-      height: 43px;
-      flex: 0 0 43px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
-    }
-
-    .app-title-area {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .app-title {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.25;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .app-subtitle {
-      margin: 3px 0 0;
-      font-size: 12px;
-      opacity: 0.88;
-    }
-
-    .app-progress-area {
-      padding: 0 20px 13px;
-      background: #673ab7;
-    }
-
-    .app-progress {
-      height: 4px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .app-progress-bar {
-      width: 20%;
-      height: 100%;
-      background: #ffffff;
-      border-radius: 10px;
-      transition: width 0.3s ease;
-    }
-
-    .app-step {
-      color: rgba(255,255,255,0.85);
-      font-size: 11px;
-      text-align: right;
-      margin-top: 4px;
-    }
-
-    .app-content {
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
-      background: #f7f8fa;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-    }
-
-    .app-content::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .app-content::-webkit-scrollbar-thumb {
-      background: #c7cbd1;
-      border-radius: 10px;
-    }
-
-    .content-inner {
-      width: 100%;
-      max-width: 620px;
-      margin: 0 auto;
-      padding: 18px 16px 25px;
-    }
-
-    .question-card {
-      background: #ffffff;
-      border: 1px solid #e2e5e9;
-      border-radius: 14px;
-      padding: 21px 19px;
-      margin-bottom: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-
-    .section-heading {
-      font-size: 20px;
-      font-weight: 600;
-      margin: 0 0 6px;
-      color: #202124;
-    }
-
-    .section-description {
-      font-size: 13px;
-      color: #6b7280;
-      line-height: 1.5;
-      margin: 0 0 22px;
-    }
-
-    .question {
-      margin-bottom: 23px;
-    }
-
-    .question:last-child {
-      margin-bottom: 0;
-    }
-
-    .question-label {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      color: #303134;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    .required {
-      color: #d93025;
-    }
-
-    .help-text {
-      font-size: 11px;
-      color: #70757a;
-      margin-top: 6px;
-      line-height: 1.45;
-    }
-
-    .app-input,
-    .app-select,
-    .app-textarea {
-      width: 100%;
-      border: 1px solid #c9cdd2;
-      border-radius: 9px;
-      background: #ffffff;
-      color: #202124;
-      padding: 12px 13px;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .app-input::placeholder,
-    .app-textarea::placeholder {
-      color: #9aa0a6;
-    }
-
-    .app-input:focus,
-    .app-select:focus,
-    .app-textarea:focus {
-      border-color: #673ab7;
-      box-shadow: 0 0 0 3px rgba(103,58,183,0.10);
-    }
-
-    .app-textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .radio-list {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .radio-option {
-      display: flex;
-      align-items: center;
-      min-height: 44px;
-      padding: 5px 4px;
-      border-radius: 8px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .radio-option:active {
-      background: #f5f1fb;
-    }
-
-    .radio-option input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .radio-circle {
-      width: 20px;
-      height: 20px;
-      flex: 0 0 20px;
-      border: 2px solid #70757a;
-      border-radius: 50%;
-      margin-right: 12px;
-      position: relative;
-    }
-
-    .radio-option input:checked + .radio-circle {
-      border-color: #673ab7;
-    }
-
-    .radio-option input:checked + .radio-circle::after {
-      content: "";
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #673ab7;
-      border-radius: 50%;
-      top: 3px;
-      left: 3px;
-    }
-
-    .radio-text {
-      font-size: 14px;
-      color: #303134;
-    }
-
-    .review-box {
-      border: 1px solid #dadce0;
-      border-radius: 12px;
-      padding: 17px;
-      background: #fafafa;
-    }
-
-    .review-heading {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 7px;
-    }
-
-    .review-text {
-      font-size: 13px;
-      line-height: 1.5;
-      color: #5f6368;
-      margin-bottom: 15px;
-    }
-
-    .review-button {
-      width: 100%;
-      min-height: 44px;
-      border: none;
-      border-radius: 9px;
-      background: #673ab7;
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .review-button:active {
-      transform: scale(0.99);
-    }
-
-    .review-completed {
-      display: none;
-      margin-top: 10px;
-      color: #137333;
-      font-size: 12px;
-    }
-
-    .rating-block {
-      margin-bottom: 26px;
-    }
-
-    .rating-block:last-child {
-      margin-bottom: 0;
-    }
-
-    .rating-label {
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    .star-row {
-      display: flex;
-      gap: 5px;
-    }
-
-    .star {
-      width: 43px;
-      height: 43px;
-      border: 1px solid #dadce0;
-      background: #ffffff;
-      color: #c5c7ca;
-      border-radius: 9px;
-      font-size: 22px;
-      padding: 0;
-      cursor: pointer;
-    }
-
-    .star.selected {
-      color: #673ab7;
-      border-color: #b9a3dc;
-      background: #f6f2fb;
-    }
-
-    .error-box {
-      display: none;
-      background: #fce8e6;
-      border: 1px solid #f5c2c0;
-      color: #c5221f;
-      border-radius: 9px;
-      padding: 12px 13px;
-      font-size: 13px;
-      line-height: 1.45;
-      margin-bottom: 12px;
-    }
-
-    .app-bottom {
-      flex-shrink: 0;
-      background: #ffffff;
-      border-top: 1px solid #e2e5e9;
-      padding: 10px 16px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
-      box-shadow: 0 -3px 10px rgba(0,0,0,0.04);
-    }
-
-    .navigation {
-      max-width: 620px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .navigation-left {
-      display: flex;
-      gap: 8px;
-    }
-
-    .app-button {
-      min-width: 90px;
-      min-height: 42px;
-      border-radius: 9px;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-    }
-
-    .button-primary {
-      background: #673ab7;
-      color: #ffffff;
-    }
-
-    .button-primary:active {
-      background: #5e35b1;
-      transform: scale(0.98);
-    }
-
-    .button-secondary {
-      background: #f1f3f4;
-      color: #3c4043;
-      border: 1px solid #dadce0;
-    }
-
-    .button-secondary:active {
-      background: #e8eaed;
-    }
-
-    .app-button:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
-    .success-card {
-      background: #ffffff;
-      border: 1px solid #e2e5e9;
-      border-radius: 14px;
-      padding: 45px 22px;
-      text-align: center;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-
-    .success-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: #e6f4ea;
-      color: #137333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 31px;
-      margin: 0 auto 18px;
-    }
-
-    .success-title {
-      font-size: 23px;
-      font-weight: 600;
-      margin-bottom: 9px;
-    }
-
-    .success-text {
-      font-size: 14px;
-      color: #5f6368;
-      line-height: 1.6;
-    }
-
-    .loading {
-      display: none;
-      text-align: center;
-      color: #70757a;
-      font-size: 12px;
-      padding: 8px 0 0;
-    }
-
-    .app-footer {
-      text-align: center;
-      font-size: 10px;
-      color: #9aa0a6;
-      padding: 3px 0 0;
-    }
-
-    /* Hidden Apps Script submission iframe */
-    #pgBackendFrame {
-      display: none;
-      width: 0;
-      height: 0;
-      border: 0;
-      position: absolute;
-      left: -9999px;
-    }
-
-    @media (max-width: 768px) {
-
-      .app-screen {
-        padding: 8px;
-        align-items: stretch;
-      }
-
-      .app-card {
-        width: 100%;
-        height: calc(100vh - 16px);
-        height: calc(100dvh - 16px);
-        max-width: none;
-        border-radius: 18px;
-      }
-
-      .content-inner {
-        padding: 14px 10px 20px;
-      }
-
-      .question-card {
-        border-radius: 13px;
-        padding: 19px 16px 22px;
-      }
-
-      .app-header {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .app-progress-area {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .app-bottom {
-        padding-left: 12px;
-        padding-right: 12px;
-      }
-
-      .app-button {
-        min-height: 44px;
-      }
-    }
-
-    @media (max-width: 420px) {
-
-      .app-screen {
-        padding: 5px;
-      }
-
-      .app-card {
-        height: calc(100vh - 10px);
-        height: calc(100dvh - 10px);
-        border-radius: 16px;
-      }
-
-      .app-title {
-        font-size: 17px;
-      }
-
-      .app-logo {
-        width: 40px;
-        height: 40px;
-        flex-basis: 40px;
-      }
-
-      .content-inner {
-        padding: 10px 7px 15px;
-      }
-
-      .question-card {
-        padding: 18px 15px 21px;
-      }
-
-      .question-label {
-        font-size: 14px;
-      }
-
-      .app-input,
-      .app-select,
-      .app-textarea {
-        font-size: 16px;
-        padding: 12px;
-      }
-
-      .star {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    @media (max-width: 350px) {
-
-      .app-screen {
-        padding: 0;
-      }
-
-      .app-card {
-        height: 100vh;
-        height: 100dvh;
-        border-radius: 0;
-        border: none;
-      }
-
-      .content-inner {
-        padding-left: 6px;
-        padding-right: 6px;
-      }
-
-      .question-card {
-        border-radius: 11px;
-      }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-
-      body {
-        min-height: 100dvh;
-        height: 100dvh;
-      }
-
-      .app-screen {
-        height: 100dvh;
-        min-height: 100dvh;
-      }
-
-      .app-card {
-        height: calc(100dvh - 16px);
-      }
-
-      .app-input,
-      .app-select,
-      .app-textarea {
-        font-size: 16px;
-      }
-
-      button {
-        touch-action: manipulation;
-      }
-    }
-
-  </style>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               viewport-fit=cover">
+
+<meta name="theme-color" content="#673ab7">
+
+<title>Sri Lalitha Devi PG</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  background: #f5f5f7;
+  color: #202124;
+}
+
+body {
+  padding-bottom: 30px;
+}
+
+/* =====================================================
+   APP CONTAINER
+   ===================================================== */
+
+.app {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f5f5f7;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.header {
+  background: #673ab7;
+  color: white;
+  padding:
+    calc(22px + env(safe-area-inset-top))
+    20px
+    24px;
+  border-radius: 0 0 22px 22px;
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.16);
+}
+
+.header-inner {
+  max-width: 560px;
+  margin: auto;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.header p {
+  margin: 7px 0 0;
+  font-size: 14px;
+  opacity: .92;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+.progress-area {
+  padding: 18px 18px 4px;
+}
+
+.progress-track {
+  height: 6px;
+  background: #ddd8e8;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 20%;
+  background: #673ab7;
+  border-radius: 20px;
+  transition: width .3s ease;
+}
+
+.progress-text {
+  margin-top: 8px;
+  text-align: right;
+  color: #666;
+  font-size: 12px;
+}
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.form-area {
+  padding: 10px 14px 30px;
+}
+
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+/* =====================================================
+   CARD
+   ===================================================== */
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 22px 18px;
+  margin-bottom: 14px;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.07);
+}
+
+.card-title {
+  margin: 0 0 5px;
+  color: #673ab7;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.card-subtitle {
+  margin: 0 0 20px;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* =====================================================
+   FIELDS
+   ===================================================== */
+
+.field {
+  margin-bottom: 18px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: #333;
+}
+
+.required {
+  color: #d32f2f;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #d5d5d5;
+  border-radius: 10px;
+  padding: 13px 13px;
+  font-size: 15px;
+  background: #fff;
+  color: #222;
+  outline: none;
+  transition:
+    border .2s,
+    box-shadow .2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #673ab7;
+  box-shadow:
+    0 0 0 3px rgba(103,58,183,.10);
+}
+
+textarea {
+  min-height: 105px;
+  resize: vertical;
+}
+
+.help {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* =====================================================
+   RADIO
+   ===================================================== */
+
+.radio-group {
+  display: grid;
+  gap: 9px;
+}
+
+.radio-option {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: #fff;
+}
+
+.radio-option input {
+  width: auto;
+  margin: 0 10px 0 0;
+  accent-color: #673ab7;
+}
+
+/* =====================================================
+   STARS
+   ===================================================== */
+
+.rating {
+  display: flex;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.star {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 32px;
+  line-height: 1;
+  color: #d2d2d2;
+  cursor: pointer;
+  transition: transform .15s;
+}
+
+.star.selected {
+  color: #ffb300;
+}
+
+.star:active {
+  transform: scale(.88);
+}
+
+.rating-value {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* =====================================================
+   GOOGLE REVIEW
+   ===================================================== */
+
+.review-box {
+  text-align: center;
+  background: #faf7ff;
+  border: 1px solid #e5dafa;
+  border-radius: 14px;
+  padding: 20px 14px;
+}
+
+.review-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.review-box h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+}
+
+.review-box p {
+  margin: 0 0 16px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.review-button {
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 20px;
+  background: #673ab7;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.review-status {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #777;
+}
+
+.review-status.done {
+  color: #188038;
+  font-weight: 600;
+}
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
+
+.navigation {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn {
+  flex: 1;
+  border: none;
+  border-radius: 11px;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-back {
+  background: #e9e6ed;
+  color: #444;
+}
+
+.btn-next,
+.btn-submit {
+  background: #673ab7;
+  color: white;
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.error-box {
+  display: none;
+  margin-bottom: 14px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #fff0f0;
+  border: 1px solid #f0b4b4;
+  color: #b3261e;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.error-box.show {
+  display: block;
+}
+
+/* =====================================================
+   SUCCESS
+   ===================================================== */
+
+.success-screen {
+  display: none;
+  padding: 45px 18px;
+  text-align: center;
+}
+
+.success-screen.active {
+  display: block;
+}
+
+.success-card {
+  background: white;
+  border-radius: 18px;
+  padding: 35px 22px;
+  box-shadow:
+    0 3px 15px rgba(0,0,0,.08);
+}
+
+.success-icon {
+  width: 74px;
+  height: 74px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: #e6f4ea;
+  color: #188038;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.success-card h2 {
+  margin: 0 0 10px;
+  color: #188038;
+}
+
+.success-card p {
+  color: #666;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.success-date {
+  margin: 18px 0;
+  padding: 13px;
+  border-radius: 10px;
+  background: #f5f2fa;
+  color: #673ab7;
+  font-weight: 700;
+}
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(255,255,255,.88);
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-overlay.active {
+  display: flex;
+}
+
+.loading-card {
+  width: min(90%, 330px);
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.15);
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 15px;
+  border: 4px solid #e5def1;
+  border-top-color: #673ab7;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-card h3 {
+  margin: 0 0 6px;
+}
+
+.loading-card p {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.footer {
+  text-align: center;
+  padding: 8px 20px 25px;
+  color: #888;
+  font-size: 11px;
+}
+
+/* =====================================================
+   HIDDEN BACKEND IFRAME
+   ===================================================== */
+
+#pgBackendFrame {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  left: -10px;
+  top: -10px;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 20px 15px;
+  }
+
+  .form-area {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .star {
+    font-size: 30px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app-screen">
+<div class="app">
 
-    <div class="app-card">
+  <!-- ==================================================
+       HEADER
+       ================================================== -->
 
-      <header class="app-header">
+  <header class="header">
+    <div class="header-inner">
 
-        <div class="app-header-row">
+      <h1>Sri Lalitha Devi PG</h1>
 
-          <div class="app-logo">
-            🏠
-          </div>
+      <p>
+        Notice Period &amp; Feedback
+      </p>
 
-          <div class="app-title-area">
+    </div>
+  </header>
 
-            <h1 class="app-title">
-              Sri Lalitha Devi PG
-            </h1>
 
-            <p class="app-subtitle">
-              Notice Period &amp; Feedback
-            </p>
+  <!-- ==================================================
+       PROGRESS
+       ================================================== -->
 
-          </div>
+  <div class="progress-area">
 
-        </div>
-
-      </header>
-
-      <div class="app-progress-area" id="progressWrapper">
-
-        <div class="app-progress">
-
-          <div
-            class="app-progress-bar"
-            id="progressBar">
-          </div>
-
-        </div>
-
-        <div
-          class="app-step"
-          id="stepText">
-          Step 1 of 5
-        </div>
-
+    <div class="progress-track">
+      <div
+        class="progress-bar"
+        id="progressBar">
       </div>
-
-      <main class="app-content">
-
-        <div class="content-inner">
-
-          <div
-            id="errorBox"
-            class="error-box">
-          </div>
-
-          <div id="formArea">
-
-            <!-- STEP 1 -->
-
-            <div
-              class="section"
-              id="step1">
-
-              <div class="question-card">
-
-                <h2 class="section-heading">
-                  Guest Details
-                </h2>
-
-                <p class="section-description">
-                  Please enter your basic details.
-                </p>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="guestName">
-
-                    Guest Name
-                    <span class="required">*</span>
-
-                  </label>
-
-                  <input
-                    type="text"
-                    id="guestName"
-                    class="app-input"
-                    placeholder="Enter your full name"
-                    autocomplete="name">
-
-                </div>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="roomNumber">
-
-                    Room Number
-                    <span class="required">*</span>
-
-                  </label>
-
-                  <input
-                    type="text"
-                    id="roomNumber"
-                    class="app-input"
-                    placeholder="Enter room number">
-
-                </div>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="mobileNumber">
-
-                    Mobile Number
-                    <span class="required">*</span>
-
-                  </label>
-
-                  <input
-                    type="tel"
-                    id="mobileNumber"
-                    class="app-input"
-                    placeholder="10-digit mobile number"
-                    maxlength="10"
-                    inputmode="numeric"
-                    autocomplete="tel">
-
-                </div>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="email">
-
-                    Email Address
-                    <span class="required">*</span>
-
-                  </label>
-
-                  <input
-                    type="email"
-                    id="email"
-                    class="app-input"
-                    placeholder="Enter your email address"
-                    autocomplete="email">
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- STEP 2 -->
-
-            <div
-              class="section"
-              id="step2">
-
-              <div class="question-card">
-
-                <h2 class="section-heading">
-                  Notice Details
-                </h2>
-
-                <p class="section-description">
-                  Our standard notice period is
-                  <strong>15 days</strong>.
-                </p>
-
-                <div class="question">
-
-                  <div class="question-label">
-
-                    Are you giving notice to vacate?
-                    <span class="required">*</span>
-
-                  </div>
-
-                  <div class="radio-list">
-
-                    <label class="radio-option">
-
-                      <input
-                        type="radio"
-                        name="noticeToVacate"
-                        value="Yes">
-
-                      <span class="radio-circle"></span>
-
-                      <span class="radio-text">
-                        Yes
-                      </span>
-
-                    </label>
-
-                    <label class="radio-option">
-
-                      <input
-                        type="radio"
-                        name="noticeToVacate"
-                        value="No">
-
-                      <span class="radio-circle"></span>
-
-                      <span class="radio-text">
-                        No
-                      </span>
-
-                    </label>
-
-                  </div>
-
-                </div>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="noticeDate">
-
-                    Notice Date
-
-                  </label>
-
-                  <input
-                    type="date"
-                    id="noticeDate"
-                    class="app-input"
-                    readonly>
-
-                  <div class="help-text">
-                    Today's date is automatically selected.
-                  </div>
-
-                </div>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="expectedVacatingDate">
-
-                    Expected Vacating Date
-                    <span class="required">*</span>
-
-                  </label>
-
-                  <input
-                    type="date"
-                    id="expectedVacatingDate"
-                    class="app-input">
-
-                  <div class="help-text">
-                    Minimum notice period is 15 days.
-                  </div>
-
-                </div>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="reasonForLeaving">
-
-                    Reason for Leaving
-                    <span class="required">*</span>
-
-                  </label>
-
-                  <select
-                    id="reasonForLeaving"
-                    class="app-select">
-
-                    <option value="">
-                      Select reason
-                    </option>
-
-                    <option value="Job Change">
-                      Job Change
-                    </option>
-
-                    <option value="College / Education">
-                      College / Education
-                    </option>
-
-                    <option value="Moving to another city">
-                      Moving to another city
-                    </option>
-
-                    <option value="Personal Reasons">
-                      Personal Reasons
-                    </option>
-
-                    <option value="Financial Reasons">
-                      Financial Reasons
-                    </option>
-
-                    <option value="Other">
-                      Other
-                    </option>
-
-                  </select>
-
-                </div>
-
-                <div class="question">
-
-                  <div class="question-label">
-
-                    Do you have any pending dues?
-                    <span class="required">*</span>
-
-                  </div>
-
-                  <div class="radio-list">
-
-                    <label class="radio-option">
-
-                      <input
-                        type="radio"
-                        name="pendingDues"
-                        value="No">
-
-                      <span class="radio-circle"></span>
-
-                      <span class="radio-text">
-                        No
-                      </span>
-
-                    </label>
-
-                    <label class="radio-option">
-
-                      <input
-                        type="radio"
-                        name="pendingDues"
-                        value="Yes">
-
-                      <span class="radio-circle"></span>
-
-                      <span class="radio-text">
-                        Yes
-                      </span>
-
-                    </label>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- STEP 3 -->
-
-            <div
-              class="section"
-              id="step3">
-
-              <div class="question-card">
-
-                <h2 class="section-heading">
-                  Google Review
-                </h2>
-
-                <p class="section-description">
-                  We would really appreciate your feedback.
-                </p>
-
-                <div class="review-box">
-
-                  <div class="review-heading">
-                    ⭐ Leave us a Google Review
-                  </div>
-
-                  <div class="review-text">
-                    Your review helps us improve our
-                    service and helps future guests.
-                  </div>
-
-                  <button
-                    type="button"
-                    class="review-button"
-                    id="reviewButton"
-                    onclick="openGoogleReview()">
-
-                    Leave a Google Review
-
-                  </button>
-
-                  <div
-                    id="reviewCompleted"
-                    class="review-completed">
-
-                    ✓ Google Review opened
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- STEP 4 -->
-
-            <div
-              class="section"
-              id="step4">
-
-              <div class="question-card">
-
-                <h2 class="section-heading">
-                  PG Feedback
-                </h2>
-
-                <p class="section-description">
-                  Please rate your experience.
-                </p>
-
-                <div class="rating-block">
-
-                  <div class="rating-label">
-
-                    Overall Experience
-                    <span class="required">*</span>
-
-                  </div>
-
-                  <div
-                    class="star-row"
-                    id="overallRating">
-
-                    <button type="button" class="star"
-                      onclick="setRating('overall',1)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('overall',2)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('overall',3)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('overall',4)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('overall',5)">★</button>
-
-                  </div>
-
-                </div>
-
-                <div class="rating-block">
-
-                  <div class="rating-label">
-
-                    Food Quality
-                    <span class="required">*</span>
-
-                  </div>
-
-                  <div
-                    class="star-row"
-                    id="foodRating">
-
-                    <button type="button" class="star"
-                      onclick="setRating('food',1)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('food',2)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('food',3)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('food',4)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('food',5)">★</button>
-
-                  </div>
-
-                </div>
-
-                <div class="rating-block">
-
-                  <div class="rating-label">
-
-                    Cleanliness
-                    <span class="required">*</span>
-
-                  </div>
-
-                  <div
-                    class="star-row"
-                    id="cleanlinessRating">
-
-                    <button type="button" class="star"
-                      onclick="setRating('cleanliness',1)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('cleanliness',2)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('cleanliness',3)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('cleanliness',4)">★</button>
-
-                    <button type="button" class="star"
-                      onclick="setRating('cleanliness',5)">★</button>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- STEP 5 -->
-
-            <div
-              class="section"
-              id="step5">
-
-              <div class="question-card">
-
-                <h2 class="section-heading">
-                  Final Feedback
-                </h2>
-
-                <p class="section-description">
-                  Is there anything you would like us
-                  to know?
-                </p>
-
-                <div class="question">
-
-                  <label
-                    class="question-label"
-                    for="complaint">
-
-                    Complaint / Suggestion
-                    <span class="required">*</span>
-
-                  </label>
-
-                  <textarea
-                    id="complaint"
-                    class="app-textarea"
-                    placeholder="Share your feedback or type 'No complaint' if none"></textarea>
-
-                  <div class="help-text">
-                    If you have no complaint or suggestion,
-                    type "No complaint".
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- SUCCESS -->
-
-          <div
-            id="successScreen"
-            style="display:none;">
-
-            <div class="success-card">
-
-              <div class="success-icon">
-                ✓
-              </div>
-
-              <div class="success-title">
-                Response Submitted
-              </div>
-
-              <div class="success-text">
-
-                Thank you for completing the form.
-
-                <br><br>
-
-                We appreciate your feedback and wish
-                you all the best.
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="app-footer">
-            Sri Lalitha Devi PG
-          </div>
-
-        </div>
-
-      </main>
-
-
-      <!-- NAVIGATION -->
-
-      <footer
-        class="app-bottom"
-        id="navigationBar">
-
-        <div class="navigation">
-
-          <div class="navigation-left">
-
-            <button
-              type="button"
-              class="app-button button-secondary"
-              id="backButton"
-              onclick="previousStep()"
-              style="display:none;">
-
-              Back
-
-            </button>
-
-          </div>
-
-          <button
-            type="button"
-            class="app-button button-primary"
-            id="nextButton"
-            onclick="nextStep()">
-
-            Next
-
-          </button>
-
-          <button
-            type="button"
-            class="app-button button-primary"
-            id="submitButton"
-            onclick="submitForm()"
-            style="display:none;">
-
-            Submit
-
-          </button>
-
-        </div>
-
-        <div
-          class="loading"
-          id="loading">
-
-          Submitting your response...
-
-        </div>
-
-      </footer>
-
+    </div>
+
+    <div
+      class="progress-text"
+      id="progressText">
+      Step 1 of 5
     </div>
 
   </div>
 
 
-  <!--
-    Hidden iframe used to communicate with
-    the Google Apps Script backend.
-  -->
+  <!-- ==================================================
+       MAIN FORM
+       ================================================== -->
 
-  <iframe
-    name="pgBackendFrame"
-    id="pgBackendFrame"
-    title="PG Backend">
-  </iframe>
+  <main
+    class="form-area"
+    id="formArea">
 
-
-  <script>
-
-    /*
-    ============================================================
-    IMPORTANT
-
-    AFTER DEPLOYING YOUR APPS SCRIPT WEB APP:
-
-    Replace the URL below with your Apps Script Web App URL.
-
-    Example:
-
-    const BACKEND_URL =
-      "https://script.google.com/macros/s/XXXXXXXXXXXX/exec";
-
-    ============================================================
-    */
-
-    const BACKEND_URL =
-      "https://script.google.com/macros/s/AKfycbw8hPO2eLudef_u7YEICpOsXUFChE-wZRi7Sf2amm8wCxuf2dQKjbYXr_owBD7RuoNupg/exec";
+    <div
+      class="error-box"
+      id="errorBox">
+    </div>
 
 
-    const GOOGLE_REVIEW_URL =
-      "https://g.page/r/CWy1PnXGq7WuEBM/review";
+    <!-- ==================================================
+         STEP 1
+         ================================================== -->
+
+    <section
+      class="step active"
+      id="step1">
+
+      <div class="card">
+
+        <h2 class="card-title">
+          Guest Details
+        </h2>
+
+        <p class="card-subtitle">
+          Please enter your current PG details.
+        </p>
 
 
-    let currentStep = 1;
+        <div class="field">
 
-    const totalSteps = 5;
+          <label for="guestName">
+            Guest Name
+            <span class="required">*</span>
+          </label>
 
-    let googleReviewClicked = false;
+          <input
+            type="text"
+            id="guestName"
+            autocomplete="name"
+            placeholder="Enter your full name">
 
-    let ratings = {
-      overall: 0,
-      food: 0,
-      cleanliness: 0
-    };
+        </div>
 
 
-    /* =========================================================
-       LOAD
-    ========================================================== */
+        <div class="field">
 
-    window.addEventListener(
-      "load",
-      function() {
+          <label for="roomNumber">
+            Room Number
+            <span class="required">*</span>
+          </label>
 
-        setTodayDate();
+          <input
+            type="text"
+            id="roomNumber"
+            placeholder="Example: 101">
 
-        updateProgress();
+        </div>
 
-      }
+
+        <div class="field">
+
+          <label for="mobileNumber">
+            Mobile Number
+            <span class="required">*</span>
+          </label>
+
+          <input
+            type="tel"
+            id="mobileNumber"
+            inputmode="numeric"
+            maxlength="10"
+            placeholder="10-digit mobile number">
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="email">
+            Email Address
+            <span class="required">*</span>
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            autocomplete="email"
+            placeholder="Enter your email address">
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         STEP 2
+         ================================================== -->
+
+    <section
+      class="step"
+      id="step2">
+
+      <div class="card">
+
+        <h2 class="card-title">
+          Notice to Vacate
+        </h2>
+
+        <p class="card-subtitle">
+          Please provide your notice details.
+          A minimum notice period of 15 days is required.
+        </p>
+
+
+        <div class="field">
+
+          <label>
+            Are you giving notice to vacate?
+            <span class="required">*</span>
+          </label>
+
+          <div class="radio-group">
+
+            <label class="radio-option">
+
+              <input
+                type="radio"
+                name="noticeToVacate"
+                value="Yes">
+
+              Yes, I am giving notice
+
+            </label>
+
+
+            <label class="radio-option">
+
+              <input
+                type="radio"
+                name="noticeToVacate"
+                value="No">
+
+              No
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Notice Date
+          </label>
+
+          <input
+            type="text"
+            value="Today"
+            disabled>
+
+          <div class="help">
+            Notice date is automatically recorded as today's date.
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="expectedVacatingDate">
+            Expected Vacating Date
+            <span class="required">*</span>
+          </label>
+
+          <input
+            type="date"
+            id="expectedVacatingDate">
+
+          <div
+            class="help"
+            id="dateHelp">
+            Minimum 15 days notice is required.
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="reasonForLeaving">
+            Reason for Leaving
+            <span class="required">*</span>
+          </label>
+
+          <select id="reasonForLeaving">
+
+            <option value="">
+              Select reason
+            </option>
+
+            <option value="Job / Work">
+              Job / Work
+            </option>
+
+            <option value="Studies">
+              Studies
+            </option>
+
+            <option value="Moving to another place">
+              Moving to another place
+            </option>
+
+            <option value="Going back home">
+              Going back home
+            </option>
+
+            <option value="Personal reasons">
+              Personal reasons
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Any Pending Dues?
+            <span class="required">*</span>
+          </label>
+
+          <div class="radio-group">
+
+            <label class="radio-option">
+
+              <input
+                type="radio"
+                name="pendingDues"
+                value="Yes">
+
+              Yes
+
+            </label>
+
+
+            <label class="radio-option">
+
+              <input
+                type="radio"
+                name="pendingDues"
+                value="No">
+
+              No
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         STEP 3
+         ================================================== -->
+
+    <section
+      class="step"
+      id="step3">
+
+      <div class="card">
+
+        <h2 class="card-title">
+          Your PG Experience
+        </h2>
+
+        <p class="card-subtitle">
+          Please rate your experience at Sri Lalitha Devi PG.
+        </p>
+
+
+        <div class="field">
+
+          <label>
+            Overall PG Experience
+            <span class="required">*</span>
+          </label>
+
+          <div
+            class="rating"
+            data-rating="overallRating">
+
+            <button
+              type="button"
+              class="star"
+              data-value="1">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="2">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="3">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="4">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="5">
+              ★
+            </button>
+
+          </div>
+
+          <div
+            class="rating-value"
+            id="overallRatingText">
+            Please select a rating
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Food Review
+            <span class="required">*</span>
+          </label>
+
+          <div
+            class="rating"
+            data-rating="foodRating">
+
+            <button
+              type="button"
+              class="star"
+              data-value="1">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="2">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="3">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="4">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="5">
+              ★
+            </button>
+
+          </div>
+
+          <div
+            class="rating-value"
+            id="foodRatingText">
+            Please select a rating
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Cleanliness &amp; Maintenance
+            <span class="required">*</span>
+          </label>
+
+          <div
+            class="rating"
+            data-rating="cleanlinessRating">
+
+            <button
+              type="button"
+              class="star"
+              data-value="1">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="2">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="3">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="4">
+              ★
+            </button>
+
+            <button
+              type="button"
+              class="star"
+              data-value="5">
+              ★
+            </button>
+
+          </div>
+
+          <div
+            class="rating-value"
+            id="cleanlinessRatingText">
+            Please select a rating
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         STEP 4
+         ================================================== -->
+
+    <section
+      class="step"
+      id="step4">
+
+      <div class="card">
+
+        <h2 class="card-title">
+          Complaint &amp; Suggestions
+        </h2>
+
+        <p class="card-subtitle">
+          Your feedback helps us improve the PG experience.
+        </p>
+
+
+        <div class="field">
+
+          <label for="complaint">
+            Complaint / Suggestion
+            <span class="required">*</span>
+          </label>
+
+          <textarea
+            id="complaint"
+            placeholder="Write your complaint or suggestion here...
+
+If you have no complaint, simply type:
+No complaint"></textarea>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         STEP 5
+         ================================================== -->
+
+    <section
+      class="step"
+      id="step5">
+
+      <div class="card">
+
+        <h2 class="card-title">
+          Almost Done
+        </h2>
+
+        <p class="card-subtitle">
+          Please open our Google Review page before submitting.
+        </p>
+
+
+        <div class="review-box">
+
+          <div class="review-icon">
+            ⭐
+          </div>
+
+          <h3>
+            Share Your Experience
+          </h3>
+
+          <p>
+            We would really appreciate it if you could
+            leave us a Google review.
+          </p>
+
+
+          <button
+            type="button"
+            class="review-button"
+            id="reviewButton">
+
+            ⭐ Open Google Review
+
+          </button>
+
+
+          <div
+            class="review-status"
+            id="reviewStatus">
+
+            Please open the review page to continue.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         NAVIGATION
+         ================================================== -->
+
+    <div class="navigation">
+
+      <button
+        type="button"
+        class="btn btn-back"
+        id="backButton"
+        style="display:none;">
+
+        Back
+
+      </button>
+
+
+      <button
+        type="button"
+        class="btn btn-next"
+        id="nextButton">
+
+        Next
+
+      </button>
+
+
+      <button
+        type="button"
+        class="btn btn-submit"
+        id="submitButton"
+        style="display:none;">
+
+        Submit
+
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- ==================================================
+       SUCCESS SCREEN
+       ================================================== -->
+
+  <section
+    class="success-screen"
+    id="successScreen">
+
+    <div class="success-card">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <h2>
+        Submission Successful
+      </h2>
+
+      <p>
+        Thank you! Your notice and feedback have been
+        successfully submitted to Sri Lalitha Devi PG.
+      </p>
+
+
+      <div
+        class="success-date"
+        id="successDate"
+        style="display:none;">
+      </div>
+
+
+      <p>
+        Your submission has been recorded successfully.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    Sri Lalitha Devi PG • Notice &amp; Feedback
+  </div>
+
+</div>
+
+
+<!-- ======================================================
+     HIDDEN APPS SCRIPT IFRAME
+     ====================================================== -->
+
+<iframe
+  name="pgBackendFrame"
+  id="pgBackendFrame"
+  title="PG Backend">
+</iframe>
+
+
+<!-- ======================================================
+     LOADING OVERLAY
+     ====================================================== -->
+
+<div
+  class="loading-overlay"
+  id="loadingOverlay">
+
+  <div class="loading-card">
+
+    <div class="spinner"></div>
+
+    <h3>
+      Submitting...
+    </h3>
+
+    <p>
+      Please wait while we save your response.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ========================================================
+   APPS SCRIPT BACKEND URL
+   ======================================================== */
+
+const BACKEND_URL =
+  "https://script.google.com/macros/s/AKfycbw8hPO2eLudef_u7YEICpOsXUFChE-wZRi7Sf2amm8wCxuf2dQKjbYXr_owBD7RuoNupg/exec";
+
+
+/* ========================================================
+   GOOGLE REVIEW
+   ======================================================== */
+
+const GOOGLE_REVIEW_URL =
+  "https://g.page/r/CWy1PnXGq7WuEBM/review";
+
+
+/* ========================================================
+   SETTINGS
+   ======================================================== */
+
+const NOTICE_PERIOD_DAYS = 15;
+
+let currentStep = 1;
+
+const totalSteps = 5;
+
+let submissionStarted = false;
+
+let submissionFinished = false;
+
+let googleReviewClicked = false;
+
+let ratingValues = {
+  overallRating: "",
+  foodRating: "",
+  cleanlinessRating: ""
+};
+
+
+/* ========================================================
+   ELEMENTS
+   ======================================================== */
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const progressText =
+  document.getElementById("progressText");
+
+const backButton =
+  document.getElementById("backButton");
+
+const nextButton =
+  document.getElementById("nextButton");
+
+const submitButton =
+  document.getElementById("submitButton");
+
+const errorBox =
+  document.getElementById("errorBox");
+
+const loadingOverlay =
+  document.getElementById("loadingOverlay");
+
+const successScreen =
+  document.getElementById("successScreen");
+
+const formArea =
+  document.getElementById("formArea");
+
+const backendFrame =
+  document.getElementById("pgBackendFrame");
+
+
+/* ========================================================
+   PROGRESS
+   ======================================================== */
+
+function updateProgress() {
+
+  const percentage =
+    (currentStep / totalSteps) * 100;
+
+  progressBar.style.width =
+    percentage + "%";
+
+  progressText.textContent =
+    "Step " +
+    currentStep +
+    " of " +
+    totalSteps;
+
+}
+
+
+/* ========================================================
+   SHOW ERROR
+   ======================================================== */
+
+function showError(message) {
+
+  errorBox.textContent =
+    message;
+
+  errorBox.classList.add("show");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* ========================================================
+   CLEAR ERROR
+   ======================================================== */
+
+function clearError() {
+
+  errorBox.textContent = "";
+
+  errorBox.classList.remove("show");
+
+}
+
+
+/* ========================================================
+   SHOW STEP
+   ======================================================== */
+
+function showStep(step) {
+
+  document
+    .querySelectorAll(".step")
+    .forEach(function(element) {
+
+      element.classList.remove("active");
+
+    });
+
+
+  const selectedStep =
+    document.getElementById(
+      "step" + step
     );
 
 
-    /* =========================================================
-       DATE
-    ========================================================== */
+  if (selectedStep) {
 
-    function setTodayDate() {
+    selectedStep.classList.add("active");
 
-      const today = new Date();
-
-      const year =
-        today.getFullYear();
-
-      const month =
-        String(
-          today.getMonth() + 1
-        ).padStart(2, "0");
-
-      const day =
-        String(
-          today.getDate()
-        ).padStart(2, "0");
-
-      const todayString =
-        year + "-" +
-        month + "-" +
-        day;
-
-      document.getElementById(
-        "noticeDate"
-      ).value = todayString;
+  }
 
 
-      const minimumDate =
-        new Date(today);
+  currentStep = step;
 
-      minimumDate.setDate(
-        minimumDate.getDate() + 15
+  updateProgress();
+
+  clearError();
+
+
+  if (currentStep === 1) {
+
+    backButton.style.display =
+      "none";
+
+  } else {
+
+    backButton.style.display =
+      "block";
+
+  }
+
+
+  if (currentStep === totalSteps) {
+
+    nextButton.style.display =
+      "none";
+
+    submitButton.style.display =
+      "block";
+
+  } else {
+
+    nextButton.style.display =
+      "block";
+
+    submitButton.style.display =
+      "none";
+
+  }
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* ========================================================
+   MOBILE NUMBER
+   ======================================================== */
+
+document
+  .getElementById("mobileNumber")
+  .addEventListener("input", function() {
+
+    this.value =
+      this.value
+        .replace(/\D/g, "")
+        .slice(0, 10);
+
+  });
+
+
+/* ========================================================
+   EXPECTED DATE MINIMUM
+   ======================================================== */
+
+function setMinimumDate() {
+
+  const today =
+    new Date();
+
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+
+  const minimum =
+    new Date(today);
+
+
+  minimum.setDate(
+    minimum.getDate() +
+    NOTICE_PERIOD_DAYS
+  );
+
+
+  const year =
+    minimum.getFullYear();
+
+  const month =
+    String(
+      minimum.getMonth() + 1
+    ).padStart(2, "0");
+
+  const day =
+    String(
+      minimum.getDate()
+    ).padStart(2, "0");
+
+
+  const minimumString =
+    year +
+    "-" +
+    month +
+    "-" +
+    day;
+
+
+  document
+    .getElementById(
+      "expectedVacatingDate"
+    )
+    .min = minimumString;
+
+
+  document
+    .getElementById(
+      "dateHelp"
+    )
+    .textContent =
+      "Earliest allowed date: " +
+      day +
+      "-" +
+      month +
+      "-" +
+      year +
+      " (15 days notice)";
+
+}
+
+
+setMinimumDate();
+
+
+/* ========================================================
+   RATING SYSTEM
+   ======================================================== */
+
+document
+  .querySelectorAll(".rating")
+  .forEach(function(ratingContainer) {
+
+    const ratingName =
+      ratingContainer.dataset.rating;
+
+    const stars =
+      ratingContainer.querySelectorAll(".star");
+
+
+    stars.forEach(function(star) {
+
+      star.addEventListener(
+        "click",
+        function() {
+
+          const value =
+            Number(
+              this.dataset.value
+            );
+
+
+          ratingValues[
+            ratingName
+          ] = String(value);
+
+
+          stars.forEach(
+            function(item) {
+
+              const itemValue =
+                Number(
+                  item.dataset.value
+                );
+
+              if (
+                itemValue <= value
+              ) {
+
+                item.classList.add(
+                  "selected"
+                );
+
+              } else {
+
+                item.classList.remove(
+                  "selected"
+                );
+
+              }
+
+            }
+          );
+
+
+          const textElement =
+            document.getElementById(
+              ratingName + "Text"
+            );
+
+
+          textElement.textContent =
+            value +
+            " / 5";
+
+        }
       );
 
+    });
 
-      const minYear =
-        minimumDate.getFullYear();
+  });
 
-      const minMonth =
-        String(
-          minimumDate.getMonth() + 1
-        ).padStart(2, "0");
 
-      const minDay =
-        String(
-          minimumDate.getDate()
-        ).padStart(2, "0");
+/* ========================================================
+   GOOGLE REVIEW BUTTON
+   ======================================================== */
 
+document
+  .getElementById("reviewButton")
+  .addEventListener(
+    "click",
+    function() {
 
-      document.getElementById(
-        "expectedVacatingDate"
-      ).min =
-        minYear + "-" +
-        minMonth + "-" +
-        minDay;
-
-    }
-
-
-    /* =========================================================
-       PROGRESS
-    ========================================================== */
-
-    function updateProgress() {
-
-      const percentage =
-        (
-          currentStep /
-          totalSteps
-        ) * 100;
-
-
-      document.getElementById(
-        "progressBar"
-      ).style.width =
-        percentage + "%";
-
-
-      document.getElementById(
-        "stepText"
-      ).textContent =
-        "Step " +
-        currentStep +
-        " of " +
-        totalSteps;
-
-
-      for (
-        let i = 1;
-        i <= totalSteps;
-        i++
-      ) {
-
-        const section =
-          document.getElementById(
-            "step" + i
-          );
-
-
-        section.style.display =
-          i === currentStep
-            ? "block"
-            : "none";
-
-      }
-
-
-      const backButton =
-        document.getElementById(
-          "backButton"
-        );
-
-      const nextButton =
-        document.getElementById(
-          "nextButton"
-        );
-
-      const submitButton =
-        document.getElementById(
-          "submitButton"
-        );
-
-
-      if (currentStep === 1) {
-
-        backButton.style.display =
-          "none";
-
-      } else {
-
-        backButton.style.display =
-          "inline-block";
-
-      }
-
-
-      if (
-        currentStep === totalSteps
-      ) {
-
-        nextButton.style.display =
-          "none";
-
-        submitButton.style.display =
-          "inline-block";
-
-      } else {
-
-        nextButton.style.display =
-          "inline-block";
-
-        submitButton.style.display =
-          "none";
-
-      }
-
-
-      const content =
-        document.querySelector(
-          ".app-content"
-        );
-
-
-      if (content) {
-
-        content.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      }
-
-    }
-
-
-    /* =========================================================
-       NEXT
-    ========================================================== */
-
-    function nextStep() {
-
-      if (
-        !validateStep(
-          currentStep
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      if (
-        currentStep < totalSteps
-      ) {
-
-        currentStep++;
-
-        clearError();
-
-        updateProgress();
-
-      }
-
-    }
-
-
-    /* =========================================================
-       BACK
-    ========================================================== */
-
-    function previousStep() {
-
-      clearError();
-
-
-      if (currentStep > 1) {
-
-        currentStep--;
-
-        updateProgress();
-
-      }
-
-    }
-
-
-    /* =========================================================
-       VALIDATION
-    ========================================================== */
-
-    function validateStep(step) {
-
-
-      /* STEP 1 */
-
-      if (step === 1) {
-
-        const guestName =
-          document.getElementById(
-            "guestName"
-          ).value.trim();
-
-
-        const roomNumber =
-          document.getElementById(
-            "roomNumber"
-          ).value.trim();
-
-
-        const mobileNumber =
-          document.getElementById(
-            "mobileNumber"
-          ).value.trim();
-
-
-        const email =
-          document.getElementById(
-            "email"
-          ).value.trim();
-
-
-        if (!guestName) {
-
-          showError(
-            "Please enter your name."
-          );
-
-          return false;
-
-        }
-
-
-        if (!roomNumber) {
-
-          showError(
-            "Please enter your room number."
-          );
-
-          return false;
-
-        }
-
-
-        if (
-          !/^[6-9]\d{9}$/.test(
-            mobileNumber
-          )
-        ) {
-
-          showError(
-            "Please enter a valid 10-digit Indian mobile number."
-          );
-
-          return false;
-
-        }
-
-
-        const emailPattern =
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-        if (
-          !emailPattern.test(email)
-        ) {
-
-          showError(
-            "Please enter a valid email address."
-          );
-
-          return false;
-
-        }
-
-      }
-
-
-      /* STEP 2 */
-
-      if (step === 2) {
-
-        const notice =
-          document.querySelector(
-            'input[name="noticeToVacate"]:checked'
-          );
-
-
-        const expectedDate =
-          document.getElementById(
-            "expectedVacatingDate"
-          ).value;
-
-
-        const reason =
-          document.getElementById(
-            "reasonForLeaving"
-          ).value;
-
-
-        const pendingDues =
-          document.querySelector(
-            'input[name="pendingDues"]:checked'
-          );
-
-
-        if (!notice) {
-
-          showError(
-            "Please select whether you are giving notice to vacate."
-          );
-
-          return false;
-
-        }
-
-
-        if (!expectedDate) {
-
-          showError(
-            "Please select your expected vacating date."
-          );
-
-          return false;
-
-        }
-
-
-        const today =
-          new Date();
-
-        today.setHours(
-          0,
-          0,
-          0,
-          0
-        );
-
-
-        const selectedDate =
-          new Date(
-            expectedDate +
-            "T00:00:00"
-          );
-
-
-        const difference =
-          Math.ceil(
-            (
-              selectedDate -
-              today
-            ) /
-            (
-              1000 *
-              60 *
-              60 *
-              24
-            )
-          );
-
-
-        if (difference < 15) {
-
-          showError(
-            "The expected vacating date must be at least 15 days from today."
-          );
-
-          return false;
-
-        }
-
-
-        if (!reason) {
-
-          showError(
-            "Please select a reason for leaving."
-          );
-
-          return false;
-
-        }
-
-
-        if (!pendingDues) {
-
-          showError(
-            "Please select whether you have any pending dues."
-          );
-
-          return false;
-
-        }
-
-      }
-
-
-      /* STEP 3 */
-
-      if (step === 3) {
-
-        if (!googleReviewClicked) {
-
-          showError(
-            "Please click the Google Review button before continuing."
-          );
-
-          return false;
-
-        }
-
-      }
-
-
-      /* STEP 4 */
-
-      if (step === 4) {
-
-        if (ratings.overall < 1) {
-
-          showError(
-            "Please rate your overall experience."
-          );
-
-          return false;
-
-        }
-
-
-        if (ratings.food < 1) {
-
-          showError(
-            "Please rate the food."
-          );
-
-          return false;
-
-        }
-
-
-        if (ratings.cleanliness < 1) {
-
-          showError(
-            "Please rate cleanliness."
-          );
-
-          return false;
-
-        }
-
-      }
-
-
-      return true;
-
-    }
-
-
-    /* =========================================================
-       ERROR
-    ========================================================== */
-
-    function showError(message) {
-
-      const errorBox =
-        document.getElementById(
-          "errorBox"
-        );
-
-
-      errorBox.textContent =
-        message;
-
-
-      errorBox.style.display =
-        "block";
-
-
-      const content =
-        document.querySelector(
-          ".app-content"
-        );
-
-
-      content.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    }
-
-
-    function clearError() {
-
-      const errorBox =
-        document.getElementById(
-          "errorBox"
-        );
-
-
-      errorBox.style.display =
-        "none";
-
-
-      errorBox.textContent =
-        "";
-
-    }
-
-
-    /* =========================================================
-       GOOGLE REVIEW
-    ========================================================== */
-
-    function openGoogleReview() {
-
-      googleReviewClicked =
-        true;
+      googleReviewClicked = true;
 
 
       window.open(
@@ -1975,490 +1675,932 @@
       );
 
 
-      document.getElementById(
-        "reviewButton"
-      ).textContent =
-        "✓ Google Review Opened";
+      const status =
+        document.getElementById(
+          "reviewStatus"
+        );
 
 
-      document.getElementById(
-        "reviewCompleted"
-      ).style.display =
-        "block";
+      status.textContent =
+        "✓ Google Review page opened. You can now submit.";
+
+      status.classList.add("done");
 
     }
+  );
 
 
-    /* =========================================================
-       STAR RATING
-    ========================================================== */
+/* ========================================================
+   VALIDATE STEP 1
+   ======================================================== */
 
-    function setRating(
-      type,
-      value
-    ) {
+function validateStep1() {
 
-      ratings[type] =
-        value;
+  const guestName =
+    document
+      .getElementById("guestName")
+      .value
+      .trim();
 
 
-      let containerId;
+  const roomNumber =
+    document
+      .getElementById("roomNumber")
+      .value
+      .trim();
 
 
-      if (type === "overall") {
+  const mobileNumber =
+    document
+      .getElementById("mobileNumber")
+      .value
+      .trim();
 
-        containerId =
-          "overallRating";
 
-      } else if (type === "food") {
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
 
-        containerId =
-          "foodRating";
 
-      } else {
+  if (!guestName) {
 
-        containerId =
-          "cleanlinessRating";
+    showError(
+      "Please enter your Guest Name."
+    );
 
-      }
+    return false;
 
+  }
 
-      const container =
-        document.getElementById(
-          containerId
-        );
 
+  if (!roomNumber) {
 
-      const stars =
-        container.querySelectorAll(
-          ".star"
-        );
+    showError(
+      "Please enter your Room Number."
+    );
 
+    return false;
 
-      stars.forEach(
-        function(star, index) {
+  }
 
-          if (index < value) {
 
-            star.classList.add(
-              "selected"
-            );
+  if (
+    !/^[6-9]\d{9}$/.test(
+      mobileNumber
+    )
+  ) {
 
-          } else {
+    showError(
+      "Please enter a valid 10-digit Indian mobile number."
+    );
 
-            star.classList.remove(
-              "selected"
-            );
+    return false;
 
-          }
+  }
 
-        }
-      );
 
-    }
+  const emailRegex =
+    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 
-    /* =========================================================
-       SUBMIT
-    ========================================================== */
+  if (
+    !emailRegex.test(email)
+  ) {
 
-    function submitForm() {
+    showError(
+      "Please enter a valid email address."
+    );
 
-      clearError();
+    return false;
 
+  }
 
-      /* Validate all steps */
 
-      for (
-        let step = 1;
-        step <= 4;
-        step++
-      ) {
+  return true;
 
-        if (!validateStep(step)) {
+}
 
-          currentStep =
-            step;
 
-          updateProgress();
+/* ========================================================
+   VALIDATE STEP 2
+   ======================================================== */
 
-          return;
-
-        }
-
-      }
-
-
-      const complaint =
-        document.getElementById(
-          "complaint"
-        ).value.trim();
-
-
-      if (!complaint) {
-
-        showError(
-          "Please enter a complaint/suggestion or type 'No complaint'."
-        );
-
-        return;
-
-      }
-
-
-      /* Check backend URL */
-
-      if (
-        !BACKEND_URL ||
-        BACKEND_URL.includes(
-          "PASTE_YOUR_APPS_SCRIPT"
-        )
-      ) {
-
-        showError(
-          "The Apps Script backend URL has not been configured yet."
-        );
-
-        return;
-
-      }
-
-
-      const notice =
-        document.querySelector(
-          'input[name="noticeToVacate"]:checked'
-        );
-
-
-      const pendingDues =
-        document.querySelector(
-          'input[name="pendingDues"]:checked'
-        );
-
-
-      const data = {
-
-        guestName:
-          document.getElementById(
-            "guestName"
-          ).value.trim(),
-
-        roomNumber:
-          document.getElementById(
-            "roomNumber"
-          ).value.trim(),
-
-        mobileNumber:
-          document.getElementById(
-            "mobileNumber"
-          ).value.trim(),
-
-        email:
-          document.getElementById(
-            "email"
-          ).value.trim(),
-
-        noticeToVacate:
-          notice
-            ? notice.value
-            : "",
-
-        noticeDate:
-          document.getElementById(
-            "noticeDate"
-          ).value,
-
-        expectedVacatingDate:
-          document.getElementById(
-            "expectedVacatingDate"
-          ).value,
-
-        reasonForLeaving:
-          document.getElementById(
-            "reasonForLeaving"
-          ).value,
-
-        pendingDues:
-          pendingDues
-            ? pendingDues.value
-            : "",
-
-        googleReviewClicked:
-          googleReviewClicked,
-
-        overallRating:
-          ratings.overall,
-
-        foodRating:
-          ratings.food,
-
-        cleanlinessRating:
-          ratings.cleanliness,
-
-        complaint:
-          complaint
-
-      };
-
-
-      /* Disable button */
-
-      const submitButton =
-        document.getElementById(
-          "submitButton"
-        );
-
-
-      submitButton.disabled =
-        true;
-
-
-      submitButton.textContent =
-        "Submitting...";
-
-
-      document.getElementById(
-        "loading"
-      ).style.display =
-        "block";
-
-
-      /*
-      ==========================================================
-      SEND TO APPS SCRIPT
-
-      We use a normal HTML POST to a hidden iframe.
-
-      This avoids the CORS problems that happen with
-      fetch() and Apps Script.
-      ==========================================================
-      */
-
-      const form =
-        document.createElement(
-          "form"
-        );
-
-
-      form.method =
-        "POST";
-
-
-      form.action =
-        BACKEND_URL;
-
-
-      form.target =
-        "pgBackendFrame";
-
-
-      form.style.display =
-        "none";
-
-
-      const payload =
-        document.createElement(
-          "input"
-        );
-
-
-      payload.type =
-        "hidden";
-
-
-      payload.name =
-        "payload";
-
-
-      payload.value =
-        JSON.stringify(data);
-
-
-      form.appendChild(
-        payload
-      );
-
-
-      document.body.appendChild(
-        form
-      );
-
-
-      form.submit();
-
-
-      setTimeout(
-        function() {
-
-          form.remove();
-
-        },
-        1000
-      );
-
-    }
-
-
-    /* =========================================================
-       RECEIVE APPS SCRIPT RESPONSE
-    ========================================================== */
-
-    window.addEventListener(
-      "message",
-      function(event) {
-
-        if (
-          !event.data ||
-          event.data.type !==
-          "pgSubmission"
-        ) {
-
-          return;
-
-        }
-
-
-        const result =
-          event.data.result ||
-          {};
-
-
-        if (result.success) {
-
-          handleSubmissionSuccess(
-            result
-          );
-
-        } else {
-
-          handleSubmissionError(
-            result
-          );
-
-        }
-
-      }
+function validateStep2() {
+
+  const notice =
+    document.querySelector(
+      'input[name="noticeToVacate"]:checked'
     );
 
 
-    /* =========================================================
-       SUCCESS
-    ========================================================== */
+  const expectedDate =
+    document
+      .getElementById(
+        "expectedVacatingDate"
+      )
+      .value
+      .trim();
 
-    function handleSubmissionSuccess(
-      response
+
+  const reason =
+    document
+      .getElementById(
+        "reasonForLeaving"
+      )
+      .value
+      .trim();
+
+
+  const pendingDues =
+    document.querySelector(
+      'input[name="pendingDues"]:checked'
+    );
+
+
+  if (!notice) {
+
+    showError(
+      "Please select whether you are giving notice."
+    );
+
+    return false;
+
+  }
+
+
+  if (!expectedDate) {
+
+    showError(
+      "Please select an Expected Vacating Date."
+    );
+
+    return false;
+
+  }
+
+
+  const selectedDate =
+    new Date(
+      expectedDate +
+      "T00:00:00"
+    );
+
+
+  const today =
+    new Date();
+
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+
+  const minimum =
+    new Date(today);
+
+
+  minimum.setDate(
+    minimum.getDate() +
+    NOTICE_PERIOD_DAYS
+  );
+
+
+  if (
+    selectedDate <
+    minimum
+  ) {
+
+    showError(
+      "Expected Vacating Date must be at least 15 days from today."
+    );
+
+    return false;
+
+  }
+
+
+  if (!reason) {
+
+    showError(
+      "Please select a Reason for Leaving."
+    );
+
+    return false;
+
+  }
+
+
+  if (!pendingDues) {
+
+    showError(
+      "Please select whether there are pending dues."
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* ========================================================
+   VALIDATE STEP 3
+   ======================================================== */
+
+function validateStep3() {
+
+  if (
+    !ratingValues.overallRating
+  ) {
+
+    showError(
+      "Please provide your overall PG experience rating."
+    );
+
+    return false;
+
+  }
+
+
+  if (
+    !ratingValues.foodRating
+  ) {
+
+    showError(
+      "Please provide your food rating."
+    );
+
+    return false;
+
+  }
+
+
+  if (
+    !ratingValues.cleanlinessRating
+  ) {
+
+    showError(
+      "Please provide your cleanliness rating."
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* ========================================================
+   VALIDATE STEP 4
+   ======================================================== */
+
+function validateStep4() {
+
+  const complaint =
+    document
+      .getElementById("complaint")
+      .value
+      .trim();
+
+
+  if (!complaint) {
+
+    showError(
+      "Please enter a complaint or suggestion. If none, type 'No complaint'."
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* ========================================================
+   VALIDATE STEP 5
+   ======================================================== */
+
+function validateStep5() {
+
+  if (!googleReviewClicked) {
+
+    showError(
+      "Please open the Google Review page before submitting."
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* ========================================================
+   VALIDATE CURRENT STEP
+   ======================================================== */
+
+function validateCurrentStep() {
+
+  if (currentStep === 1) {
+
+    return validateStep1();
+
+  }
+
+
+  if (currentStep === 2) {
+
+    return validateStep2();
+
+  }
+
+
+  if (currentStep === 3) {
+
+    return validateStep3();
+
+  }
+
+
+  if (currentStep === 4) {
+
+    return validateStep4();
+
+  }
+
+
+  if (currentStep === 5) {
+
+    return validateStep5();
+
+  }
+
+
+  return true;
+
+}
+
+
+/* ========================================================
+   NEXT BUTTON
+   ======================================================== */
+
+nextButton.addEventListener(
+  "click",
+  function() {
+
+    if (
+      !validateCurrentStep()
     ) {
 
-      document.getElementById(
-        "formArea"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "progressWrapper"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "navigationBar"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "errorBox"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "successScreen"
-      ).style.display =
-        "block";
-
-
-      document.getElementById(
-        "loading"
-      ).style.display =
-        "none";
+      return;
 
     }
 
 
-    /* =========================================================
-       ERROR FROM SERVER
-    ========================================================== */
-
-    function handleSubmissionError(
-      error
+    if (
+      currentStep <
+      totalSteps
     ) {
 
-      const submitButton =
-        document.getElementById(
-          "submitButton"
-        );
+      showStep(
+        currentStep + 1
+      );
 
+    }
+
+  }
+);
+
+
+/* ========================================================
+   BACK BUTTON
+   ======================================================== */
+
+backButton.addEventListener(
+  "click",
+  function() {
+
+    if (
+      currentStep > 1
+    ) {
+
+      showStep(
+        currentStep - 1
+      );
+
+    }
+
+  }
+);
+
+
+/* ========================================================
+   COLLECT FORM DATA
+   ======================================================== */
+
+function collectFormData() {
+
+  const notice =
+    document.querySelector(
+      'input[name="noticeToVacate"]:checked'
+    );
+
+
+  const pending =
+    document.querySelector(
+      'input[name="pendingDues"]:checked'
+    );
+
+
+  return {
+
+    guestName:
+      document
+        .getElementById(
+          "guestName"
+        )
+        .value
+        .trim(),
+
+    roomNumber:
+      document
+        .getElementById(
+          "roomNumber"
+        )
+        .value
+        .trim(),
+
+    mobileNumber:
+      document
+        .getElementById(
+          "mobileNumber"
+        )
+        .value
+        .trim(),
+
+    email:
+      document
+        .getElementById(
+          "email"
+        )
+        .value
+        .trim(),
+
+    noticeToVacate:
+      notice
+        ? notice.value
+        : "",
+
+    expectedVacatingDate:
+      document
+        .getElementById(
+          "expectedVacatingDate"
+        )
+        .value,
+
+    reasonForLeaving:
+      document
+        .getElementById(
+          "reasonForLeaving"
+        )
+        .value
+        .trim(),
+
+    pendingDues:
+      pending
+        ? pending.value
+        : "",
+
+    overallRating:
+      ratingValues.overallRating,
+
+    foodRating:
+      ratingValues.foodRating,
+
+    cleanlinessRating:
+      ratingValues.cleanlinessRating,
+
+    complaint:
+      document
+        .getElementById(
+          "complaint"
+        )
+        .value
+        .trim(),
+
+    googleReviewClicked:
+      googleReviewClicked
+
+  };
+
+}
+
+
+/* ========================================================
+   SHOW SUCCESS
+   ======================================================== */
+
+function handleSubmissionSuccess(
+  result
+) {
+
+  if (
+    submissionFinished
+  ) {
+
+    return;
+
+  }
+
+
+  submissionFinished = true;
+
+  submissionStarted = false;
+
+
+  loadingOverlay.classList.remove(
+    "active"
+  );
+
+
+  formArea.style.display =
+    "none";
+
+
+  successScreen.classList.add(
+    "active"
+  );
+
+
+  if (
+    result &&
+    result.expectedVacatingDate
+  ) {
+
+    const successDate =
+      document.getElementById(
+        "successDate"
+      );
+
+
+    successDate.textContent =
+      "Expected Vacating Date: " +
+      result.expectedVacatingDate;
+
+
+    successDate.style.display =
+      "block";
+
+  }
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* ========================================================
+   SHOW SUBMISSION ERROR
+   ======================================================== */
+
+function handleSubmissionError(
+  result
+) {
+
+  submissionStarted = false;
+
+
+  loadingOverlay.classList.remove(
+    "active"
+  );
+
+
+  const message =
+    result &&
+    result.message
+      ? result.message
+      : "Unable to submit the form. Please try again.";
+
+
+  showError(message);
+
+}
+
+
+/* ========================================================
+   RECEIVE APPS SCRIPT RESPONSE
+   ======================================================== */
+
+window.addEventListener(
+  "message",
+  function(event) {
+
+    if (
+      !event.data ||
+      event.data.type !==
+        "pgSubmission"
+    ) {
+
+      return;
+
+    }
+
+
+    const result =
+      event.data.result || {};
+
+
+    if (result.success) {
+
+      handleSubmissionSuccess(
+        result
+      );
+
+    } else {
+
+      handleSubmissionError(
+        result
+      );
+
+    }
+
+  }
+);
+
+
+/* ========================================================
+   IFRAME LOAD RESPONSE
+   ========================================================
+
+   IMPORTANT:
+
+   Apps Script returns an HTML response
+   inside the hidden iframe.
+
+   When that response finishes loading,
+   this provides a fallback success signal.
+
+   ======================================================== */
+
+backendFrame.addEventListener(
+  "load",
+  function() {
+
+    if (
+      !submissionStarted ||
+      submissionFinished
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+     * Give the Apps Script page a short moment
+     * to execute its postMessage script.
+     */
+
+    setTimeout(
+      function() {
+
+        if (
+          submissionStarted &&
+          !submissionFinished
+        ) {
+
+          handleSubmissionSuccess({
+            success: true
+          });
+
+        }
+
+      },
+      500
+    );
+
+  }
+);
+
+
+/* ========================================================
+   SUBMIT FORM
+   ======================================================== */
+
+submitButton.addEventListener(
+  "click",
+  function() {
+
+    if (
+      submissionStarted
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      !validateCurrentStep()
+    ) {
+
+      return;
+
+    }
+
+
+    const data =
+      collectFormData();
+
+
+    submissionStarted = true;
+
+    submissionFinished = false;
+
+
+    clearError();
+
+
+    loadingOverlay.classList.add(
+      "active"
+    );
+
+
+    submitButton.disabled =
+      true;
+
+
+    /*
+     * Create normal HTML form.
+     *
+     * This avoids fetch/CORS problems with
+     * Google Apps Script.
+     */
+
+    const form =
+      document.createElement(
+        "form"
+      );
+
+
+    form.method =
+      "POST";
+
+
+    form.action =
+      BACKEND_URL;
+
+
+    form.target =
+      "pgBackendFrame";
+
+
+    form.style.display =
+      "none";
+
+
+    const payload =
+      document.createElement(
+        "input"
+      );
+
+
+    payload.type =
+      "hidden";
+
+
+    payload.name =
+      "payload";
+
+
+    payload.value =
+      JSON.stringify(data);
+
+
+    form.appendChild(
+      payload
+    );
+
+
+    document.body.appendChild(
+      form
+    );
+
+
+    try {
+
+      form.submit();
+
+    } catch (error) {
+
+      submissionStarted =
+        false;
+
+      loadingOverlay.classList.remove(
+        "active"
+      );
 
       submitButton.disabled =
         false;
 
-
-      submitButton.textContent =
-        "Submit";
-
-
-      document.getElementById(
-        "loading"
-      ).style.display =
-        "none";
-
-
-      let message =
-        "Unable to submit the form. Please try again.";
-
-
-      if (
-        error &&
-        error.message
-      ) {
-
-        message =
-          error.message;
-
-      }
-
-
       showError(
-        message
+        "Unable to submit the form. Please try again."
       );
 
     }
 
 
-    /* =========================================================
-       ENTER KEY
-    ========================================================== */
+    /*
+     * Remove temporary form after submission.
+     */
 
-    document.addEventListener(
-      "keydown",
-      function(event) {
+    setTimeout(
+      function() {
 
         if (
-          event.key === "Enter" &&
-          event.target.tagName !==
-          "TEXTAREA"
+          form &&
+          form.parentNode
         ) {
 
-          event.preventDefault();
+          form.parentNode.removeChild(
+            form
+          );
 
         }
 
-      }
+      },
+      3000
     );
 
-  </script>
+
+    /*
+     * Safety timeout.
+     *
+     * If Apps Script does not respond at all,
+     * don't leave the user permanently stuck.
+     */
+
+    setTimeout(
+      function() {
+
+        if (
+          submissionStarted &&
+          !submissionFinished
+        ) {
+
+          submissionStarted =
+            false;
+
+          loadingOverlay.classList.remove(
+            "active"
+          );
+
+          submitButton.disabled =
+            false;
+
+          showError(
+            "The server is taking too long to respond. Please check your internet connection and try again."
+          );
+
+        }
+
+      },
+      20000
+    );
+
+  }
+);
+
+
+/* ========================================================
+   INITIALIZE
+   ======================================================== */
+
+updateProgress();
+
+setMinimumDate();
+
+</script>
 
 </body>
 </html>
